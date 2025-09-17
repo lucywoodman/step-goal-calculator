@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Step Goal Calculator: How many steps do I need to take to meet my step goal?">
+    <meta name="keywords" content="steps, step goal, distance goal, distance, km, mile, garmin challenge, strava challenge">
+    <title>Step Goal Calculator</title>
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚶‍♂️ Step Goal Calculator</h1>
+            <p>Calculate what you need to achieve your fitness goals</p>
+        </div>
+        
+        <div class="content">
+            <form id="calculatorForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="goalType">Goal Type</label>
+                        <select id="goalType" onchange="toggleUnits()">
+                            <option value="steps">Steps</option>
+                            <option value="distance">Distance</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goalAmount">Goal Amount</label>
+                        <input type="number" id="goalAmount" placeholder="e.g. 300000" required>
+                    </div>
+                    
+                    <div class="form-group" id="distanceUnitGroup" style="display: none;">
+                        <label for="distanceUnit">Distance Unit</label>
+                        <select id="distanceUnit">
+                            <option value="km">Kilometres</option>
+                            <option value="miles">Miles</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="currentProgress">Current Progress</label>
+                        <input type="number" id="currentProgress" placeholder="e.g. 90000" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="targetDate">Target Date</label>
+                        <input type="date" id="targetDate" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="stepsPerKm">Steps per Kilometre</label>
+                        <input type="number" id="stepsPerKm" value="1400" placeholder="e.g. 1400">
+                        <small style="color: #666; font-size: 0.9rem;">
+                            Average: 1400 steps/km.
+                            <a href="#" onclick="showStrideHelp(); return false;" style="color: #667eea;">How to estimate?</a>
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="walkingSpeed">Walking Speed (km/h)</label>
+                        <input type="number" id="walkingSpeed" step="0.1" value="5.0" placeholder="e.g. 5.0">
+                        <small style="color: #666; font-size: 0.9rem;">
+                            Average: 5 km/h.
+                            <a href="#" onclick="showSpeedHelp(); return false;" style="color: #667eea;">How to estimate?</a>
+                        </small>
+                    </div>
+                </div>
+
+                <div id="helpModal" class="modal" style="display: none;">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeHelp()">&times;</span>
+                        <div id="helpContent"></div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="calculate-btn">Calculate My Daily Target</button>
+            </form>
+            
+            <div id="results" class="results">
+                <div id="resultsContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+</body>
+
+</html>
