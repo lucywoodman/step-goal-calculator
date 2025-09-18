@@ -73,6 +73,18 @@ function calculateTarget() {
         const alertIcon = isAchievable ? '✅' : '⚠️';
         
         resultsHTML = `
+            <div class="${alertClass}">
+                <strong>${alertIcon} ${isAchievable ? 'Achievable!' : 'Challenging!'}</strong>
+                ${isAchievable 
+                    ? 'This target looks achievable with consistent effort.'
+                    : 'This target is quite ambitious - you may want to consider if it\'s realistic for your lifestyle.'
+                }
+                ${dailyStepsNeeded > currentDailyAverage * 2 
+                    ? `<br><br>Note: This requires more than doubling your current average of ${Math.round(currentDailyAverage).toLocaleString()} steps/day.`
+                    : ''
+                }
+            </div>
+            
             <div class="result-item">
                 <div class="result-label">Steps Remaining</div>
                 <div class="result-value">${Math.ceil(stepsRemaining).toLocaleString()} steps</div>
@@ -96,18 +108,6 @@ function calculateTarget() {
             <div class="result-item">
                 <div class="result-label">Daily Walking Time Needed</div>
                 <div class="result-value">${Math.floor(dailyTimeNeeded)}h ${Math.round((dailyTimeNeeded % 1) * 60)}min</div>
-            </div>
-            
-            <div class="${alertClass}">
-                <strong>${alertIcon} ${isAchievable ? 'Achievable!' : 'Challenging!'}</strong>
-                ${isAchievable 
-                    ? 'This target looks achievable with consistent effort.'
-                    : 'This target is quite ambitious - you may want to consider if it\'s realistic for your lifestyle.'
-                }
-                ${dailyStepsNeeded > currentDailyAverage * 2 
-                    ? `<br><br>Note: This requires more than doubling your current average of ${Math.round(currentDailyAverage).toLocaleString()} steps/day.`
-                    : ''
-                }
             </div>
         `;
     }
