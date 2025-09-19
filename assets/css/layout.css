@@ -45,14 +45,6 @@
   align-items: center;
 }
 
-/* Wrapper for backward compatibility */
-.wrapper {
-    margin-inline: auto;
-    max-width: var(--wrapper-max-width);
-    padding-inline: var(--gutter-wrapper-inline, var(--gutter));
-    position: relative;
-}
-
 /* === BOX PRIMITIVE === */
 .box {
   padding: var(--padding, var(--space-m));
