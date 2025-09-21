@@ -1,6 +1,3 @@
-/* ABOUTME: Every Layout primitives for composable, intrinsic web design */
-/* ABOUTME: This file contains all layout primitives including Stack, Center, Box, Cluster, Grid, Sidebar, Switcher, Cover, Frame, Reel, and Imposter */
-
 /* === STACK PRIMITIVE === */
 .stack {
   display: flex;
@@ -20,11 +17,6 @@
 .stack-m { --space: var(--space-m); }
 .stack-l { --space: var(--space-l); }
 .stack-xl { --space: var(--space-xl); }
-
-/* Flow for backward compatibility */
-.flow > * + * {
-    margin-block-start: var(--flow-space, 1em);
-}
 
 /* === CENTER PRIMITIVE === */
 .center {
@@ -51,8 +43,8 @@
   border: var(--border-width, 0) solid;
   border-color: var(--border-color);
   border-radius: var(--border-radius, 0);
-  background-color: var(--box-bg);
-  color: var(--box-color);
+  background-color: var(--box-bg, --color-light);
+  color: var(--box-color, --color-dark);
 }
 
 .box * {

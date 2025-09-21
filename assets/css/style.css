@@ -1,6 +1,3 @@
-/* ABOUTME: Main stylesheet that imports all CSS modules using Every Layout principles */
-/* ABOUTME: This file orchestrates the import of tokens, base styles, layout primitives, components, and utilities */
-
 /* Import CSS modules in dependency order */
 @import url('./tokens.css');
 @import url('./base.css');
