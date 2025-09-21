@@ -27,7 +27,7 @@
         <section class="region">
             <div class="center">
                 <div class="stack stack-xl">
-                    <form id="calculatorForm" class="box stack stack-l calculator-form">
+                    <form id="calculatorForm" class="box stack stack-l">
                         <div class="stack stack-s">
                             <label for="goalType">Goal Type</label>
                             <select id="goalType" onchange="toggleUnits()">
@@ -59,42 +59,43 @@
                             <input type="date" id="targetDate" required>
                         </div>
 
-                        <div class="stack stack-s">
-                            <label for="stepsPerKm">Steps per Kilometre</label>
-                            <input type="number" id="stepsPerKm" value="1400" placeholder="e.g. 1400">
-                            <small>
-                                Average: 1400 steps/km.
-                                <a href="#" onclick="showStrideHelp(); return false;">How to estimate?</a>
-                            </small>
-                        </div>
+                        <details>
+                            <summary>Advanced</summary>
+                            <div class="stack stack-s">
+                                <label for="stepsPerKm">Steps per Kilometre</label>
+                                <input type="number" id="stepsPerKm" value="1400" placeholder="e.g. 1400">
+                                <small>
+                                    Average: 1400 steps/km.
+                                    <a href="#" onclick="showStrideHelp(); return false;">How to estimate?</a>
+                                </small>
+                            </div>
 
-                        <div class="stack stack-s">
-                            <label for="walkingSpeed">Walking Speed (km/h)</label>
-                            <input type="number" id="walkingSpeed" step="0.1" value="5.0" placeholder="e.g. 5.0">
-                            <small>
-                                Average: 5 km/h.
-                                <a href="#" onclick="showSpeedHelp(); return false;">How to estimate?</a>
-                            </small>
-                        </div>
+                            <div class="stack stack-s">
+                                <label for="walkingSpeed">Walking Speed (km/h)</label>
+                                <input type="number" id="walkingSpeed" step="0.1" value="5.0" placeholder="e.g. 5.0">
+                                <small>
+                                    Average: 5 km/h.
+                                    <a href="#" onclick="showSpeedHelp(); return false;">How to estimate?</a>
+                                </small>
+                            </div>
+                        </details>
 
                         <button type="submit" class="button" data-button-variant="primary">Calculate My Daily Target</button>
                     </form>
 
-                    <div id="results" class="results">
+                    <div id="results" hidden>
                         <div id="resultsContent" class="stack stack-l"></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div id="helpModal" class="imposter modal-overlay" style="display: none;">
-            <div class="center">
-                <div class="box modal-content">
-                    <div class="cluster cluster-end">
-                        <button class="modal-close" onclick="closeHelp()">&times;</button>
-                    </div>
-                    <div id="helpContent" class="stack"></div>
+        <div id="helpModal" class="imposter modal-overlay" hidden>
+            <div class="box" data-box-variant="modal">
+                <div class="cluster cluster-end">
+                    <button class="modal-close" onclick="closeHelp()">&times;</button>
                 </div>
+                <div id="helpContent" class="stack"></div>
             </div>
         </div>
     </main>
