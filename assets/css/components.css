@@ -1,9 +1,5 @@
-/* ABOUTME: UI component styles including forms, buttons, modals, and interactive elements */
-/* ABOUTME: This file contains styling for specific UI components and their states */
-
 /* === FORM COMPONENTS === */
 
-/* Enhanced form styling with Every Layout principles */
 form {
   display: flex;
   flex-direction: column;
@@ -12,54 +8,6 @@ form {
 
 form > * {
   text-align: left;
-}
-
-/* Backward compatibility */
-form > * + * {
-  margin-top: var(--flow-space, 1rem);
-}
-
-input:not([type=checkbox],[type=radio],[type=color]),select,textarea {
-    --focus-ring-offset: -0.6ex;
-    --color-selection-text: var(--input-background,var(--color-dark));
-    background: var(--input-background,var(--color-light));
-    border: var(--input-stroke,var(--stroke));
-    border-radius: var(--input-radius,0);
-    font-family: var(--input-font-family,var(--font-base));
-    font-size: var(--input-font-size,var(--size-step--1));
-    font-weight: var(--input-weight,var(--font-normal));
-    line-height: var(--input-leading,var(--leading));
-    padding: var(--input-padding,var(--space-2xs));
-    width: var(--input-width,100%)
-}
-
-label {
-    font-family: var(--label-font-family,var(--font-accent));
-    font-size: var(--label-font-size,var(--size-step-3));
-    font-weight: var(--label-weight,var(--font-normal));
-    letter-spacing: var(--label-kerning,var(--kerning));
-    line-height: var(--label-leading,var(--leading));
-    text-transform: var(--label-text-transform,none)
-}
-
-label:after {
-    content: "\A";
-    white-space: pre
-}
-
-label:has(input) {
-    align-items: var(--label-align-items,flex-start);
-    display: var(--label-display,flex);
-    flex-direction: var(--label-flex-direction,column);
-    font-weight: revert;
-    gap: var(--input-flex-gap,var(--space-s))
-}
-
-label:has(input)+label:has(input) {
-    margin-block-start:var(--input-check-sibling-space,var(--space-xs))}
-
-label: has(input) input {
-    transform:translateY(.25ex)
 }
 
 /* === BUTTON COMPONENTS === */
@@ -102,24 +50,14 @@ label: has(input) input {
 
 /* === RESULT COMPONENTS === */
 
-.results.show {
-    animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.result-label {
-    font-weight: 600;
-    color: var(--color-dark);
-}
-
 .result-value {
     font-size: var(--text-size-heading-4);
     color: var(--color-primary);
     font-weight: 700;
+}
+
+.box[data-box-variant=modal] {
+  --padding: var(--space-xl)
 }
 
 .box[data-box-variant=warning] {
@@ -141,21 +79,6 @@ label: has(input) input {
   color: var(--color-light);
 }
 
-.hero-header h1 {
-  font-size: var(--text-size-heading-1);
-}
-
-.hero-header h2 {
-  font-size: var(--text-size-heading-3);
-  font-weight: normal;
-}
-
-/* Form container styling */
-.calculator-form {
-  --box-bg: var(--color-light);
-  --padding: var(--space-l);
-}
-
 /* Modal styling */
 .modal-overlay {
   --imposter-z-index: 1000;
@@ -163,20 +86,6 @@ label: has(input) input {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.modal-overlay[style*="display: none"] {
-  display: none !important;
-}
-
-.modal-content {
-  --box-bg: var(--color-light);
-  --padding: var(--space-xl);
-  --border-radius: 12px;
-  max-width: 600px;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
 }
 
 .modal-close {
