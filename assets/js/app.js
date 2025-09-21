@@ -73,55 +73,53 @@ function calculateTarget() {
         const alertIcon = isAchievable ? '✅' : '⚠️';
 
         resultsHTML = `
-            <div class="stack stack-l">
-                <div class="box" data-box-variant="${alertClass}">
-                    <div class="stack">
-                        <strong>${alertIcon} ${isAchievable ? 'Achievable!' : 'Challenging!'}</strong>
-                        <p>${isAchievable
-                            ? 'This target looks achievable with consistent effort.'
-                            : 'This target is quite ambitious - you may want to consider if it\'s realistic for your lifestyle.'
-                        }</p>
-                        ${dailyStepsNeeded > currentDailyAverage * 2
-                            ? `<p>Note: This requires more than doubling your current average of ${Math.round(currentDailyAverage).toLocaleString()} steps/day.</p>`
-                            : ''
-                        }
+            <div class="box" data-box-variant="${alertClass}">
+                <div class="stack">
+                    <strong>${alertIcon} ${isAchievable ? 'Achievable!' : 'Challenging!'}</strong>
+                    <p>${isAchievable
+                        ? 'This target looks achievable with consistent effort.'
+                        : 'This target is quite ambitious - you may want to consider if it\'s realistic for your lifestyle.'
+                    }</p>
+                    ${dailyStepsNeeded > currentDailyAverage * 2
+                        ? `<p>Note: This requires more than doubling your current average of ${Math.round(currentDailyAverage).toLocaleString()} steps/day.</p>`
+                        : ''
+                    }
+                </div>
+            </div>
+
+            <div class="grid" style="--grid-min-item-size: 15rem;">
+                <div class="box">
+                    <div class="stack stack-s">
+                        <strong>Steps Remaining</strong>
+                        <div class="result-value">${Math.ceil(stepsRemaining).toLocaleString()} steps</div>
                     </div>
                 </div>
 
-                <div class="grid" style="--grid-min-item-size: 15rem;">
-                    <div class="box">
-                        <div class="stack stack-s">
-                            <div class="result-label">Steps Remaining</div>
-                            <div class="result-value">${Math.ceil(stepsRemaining).toLocaleString()} steps</div>
-                        </div>
+                <div class="box">
+                    <div class="stack stack-s">
+                        <strong>Days Remaining</strong>
+                        <div class="result-value">${daysRemaining} days</div>
                     </div>
+                </div>
 
-                    <div class="box">
-                        <div class="stack stack-s">
-                            <div class="result-label">Days Remaining</div>
-                            <div class="result-value">${daysRemaining} days</div>
-                        </div>
+                <div class="box">
+                    <div class="stack stack-s">
+                        <strong>Daily Steps Needed</strong>
+                        <div class="result-value">${Math.ceil(dailyStepsNeeded).toLocaleString()} steps/day</div>
                     </div>
+                </div>
 
-                    <div class="box">
-                        <div class="stack stack-s">
-                            <div class="result-label">Daily Steps Needed</div>
-                            <div class="result-value">${Math.ceil(dailyStepsNeeded).toLocaleString()} steps/day</div>
-                        </div>
+                <div class="box">
+                    <div class="stack stack-s">
+                        <strong>Daily Distance Needed</strong>
+                        <div class="result-value">${dailyKmNeeded.toFixed(1)} km (${dailyMilesNeeded.toFixed(1)} miles)</div>
                     </div>
+                </div>
 
-                    <div class="box">
-                        <div class="stack stack-s">
-                            <div class="result-label">Daily Distance Needed</div>
-                            <div class="result-value">${dailyKmNeeded.toFixed(1)} km (${dailyMilesNeeded.toFixed(1)} miles)</div>
-                        </div>
-                    </div>
-
-                    <div class="box">
-                        <div class="stack stack-s">
-                            <div class="result-label">Daily Walking Time Needed</div>
-                            <div class="result-value">${Math.floor(dailyTimeNeeded)}h ${Math.round((dailyTimeNeeded % 1) * 60)}min</div>
-                        </div>
+                <div class="box">
+                    <div class="stack stack-s">
+                        <strong>Daily Walking Time Needed</strong>
+                        <div class="result-value">${Math.floor(dailyTimeNeeded)}h ${Math.round((dailyTimeNeeded % 1) * 60)}min</div>
                     </div>
                 </div>
             </div>
@@ -129,7 +127,7 @@ function calculateTarget() {
     }
     
     document.getElementById('resultsContent').innerHTML = resultsHTML;
-    document.getElementById('results').classList.add('show');
+    document.getElementById('results').removeAttribute('hidden');
 }
 
 function showError(message) {
@@ -139,7 +137,7 @@ function showError(message) {
         </div>
     `;
     document.getElementById('resultsContent').innerHTML = resultsHTML;
-    document.getElementById('results').classList.add('show');
+    document.getElementById('results').removeAttribute('hidden');
 }
 
 function showStrideHelp() {
@@ -148,99 +146,70 @@ function showStrideHelp() {
             <div class="stack stack-l">
                 <h2>How to Estimate Steps per Kilometre</h2>
 
-                <div class="box">
-                    <div class="stack">
-                        <h3>Quick Averages by Height:</h3>
-                        <ul>
-                            <li><strong>Shorter (under 5'4"/163cm):</strong> ~1,500-1,600 steps/km</li>
-                            <li><strong>Average (5'4"-5'10"/163-178cm):</strong> ~1,300-1,500 steps/km</li>
-                            <li><strong>Taller (over 5'10"/178cm):</strong> ~1,200-1,400 steps/km</li>
-                        </ul>
-                    </div>
-                </div>
+                <h3>Quick Averages by Height:</h3>
+                <ul>
+                    <li><strong>Shorter (under 5'4"/163cm):</strong> ~1,500-1,600 steps/km</li>
+                    <li><strong>Average (5'4"-5'10"/163-178cm):</strong> ~1,300-1,500 steps/km</li>
+                    <li><strong>Taller (over 5'10"/178cm):</strong> ~1,200-1,400 steps/km</li>
+                </ul>
 
-                <div class="box">
-                    <div class="stack">
-                        <h3>More Accurate Methods:</h3>
-                        <ul>
-                            <li><strong>Walk a known distance:</strong> Find a 1km route (track, measured path) and count your steps</li>
-                            <li><strong>Use a football pitch:</strong> About 100m long - walk 10 lengths and count steps, then multiply by 10</li>
-                            <li><strong>Smartphone step counter:</strong> Many phones have built-in step counters you can test against known distances</li>
-                        </ul>
-                    </div>
-                </div>
+                <h3>More Accurate Methods:</h3>
+                <ul>
+                    <li><strong>Walk a known distance:</strong> Find a 1km route (track, measured path) and count your steps</li>
+                    <li><strong>Use a football pitch:</strong> About 100m long - walk 10 lengths and count steps, then multiply by 10</li>
+                    <li><strong>Smartphone step counter:</strong> Many phones have built-in step counters you can test against known distances</li>
+                </ul>
 
-                <div class="box box-invert">
-                    <p><strong>Default used:</strong> 1,400 steps/km (a good average for most people)</p>
-                </div>
+                <p><strong>Default used:</strong> 1,400 steps/km (a good average for most people)</p>
             </div>
         </div>
     `;
     document.getElementById('helpContent').innerHTML = helpContent;
-    document.getElementById('helpModal').classList.add('show');
+    document.getElementById('helpModal').removeAttribute('hidden');
 }
 
 function showSpeedHelp() {
     const helpContent = `
-        <div class="center">
-            <div class="stack stack-l">
-                <h2>How to Estimate Walking Speed</h2>
+        <h2>How to Estimate Walking Speed</h2>
 
-                <div class="box">
-                    <div class="stack">
-                        <h3>Typical Walking Speeds:</h3>
-                        <ul>
-                            <li><strong>Leisurely stroll:</strong> 3-4 km/h (1.9-2.5 mph)</li>
-                            <li><strong>Comfortable pace:</strong> 4-5 km/h (2.5-3.1 mph)</li>
-                            <li><strong>Brisk walk:</strong> 5-6 km/h (3.1-3.7 mph)</li>
-                            <li><strong>Fast walk/power walk:</strong> 6-7 km/h (3.7-4.3 mph)</li>
-                        </ul>
-                    </div>
-                </div>
+        <h3>Typical Walking Speeds:</h3>
+        <ul>
+            <li><strong>Leisurely stroll:</strong> 3-4 km/h (1.9-2.5 mph)</li>
+            <li><strong>Comfortable pace:</strong> 4-5 km/h (2.5-3.1 mph)</li>
+            <li><strong>Brisk walk:</strong> 5-6 km/h (3.1-3.7 mph)</li>
+            <li><strong>Fast walk/power walk:</strong> 6-7 km/h (3.7-4.3 mph)</li>
+        </ul>
 
-                <div class="box">
-                    <div class="stack">
-                        <h3>Quick Test:</h3>
-                        <ul>
-                            <li>Time yourself walking 1km (or 0.6 miles)</li>
-                            <li>If it takes 12 minutes = 5 km/h</li>
-                            <li>If it takes 15 minutes = 4 km/h</li>
-                            <li>If it takes 10 minutes = 6 km/h</li>
-                        </ul>
-                    </div>
-                </div>
+        <h3>Quick Test:</h3>
+        <ul>
+            <li>Time yourself walking 1km (or 0.6 miles)</li>
+            <li>If it takes 12 minutes = 5 km/h</li>
+            <li>If it takes 15 minutes = 4 km/h</li>
+            <li>If it takes 10 minutes = 6 km/h</li>
+        </ul>
 
-                <div class="box">
-                    <div class="stack">
-                        <h3>Factors that affect speed:</h3>
-                        <ul>
-                            <li>Terrain (hills, paths vs roads)</li>
-                            <li>Weather conditions</li>
-                            <li>Whether you're walking the dog (usually slower!)</li>
-                            <li>Your fitness level</li>
-                        </ul>
-                    </div>
-                </div>
+        <h3>Factors that affect speed:</h3>
+        <ul>
+            <li>Terrain (hills, paths vs roads)</li>
+            <li>Weather conditions</li>
+            <li>Whether you're walking the dog (usually slower!)</li>
+            <li>Your fitness level</li>
+        </ul>
 
-                <div class="box box-invert">
-                    <p><strong>Default used:</strong> 5 km/h (a comfortable brisk pace for most people)</p>
-                </div>
-            </div>
-        </div>
+        <p><strong>Default used:</strong> 5 km/h (a comfortable brisk pace for most people)</p>
     `;
     document.getElementById('helpContent').innerHTML = helpContent;
-    document.getElementById('helpModal').classList.add('show');
+    document.getElementById('helpModal').removeAttribute('hidden');
 }
 
 function closeHelp() {
-    document.getElementById('helpModal').classList.remove('show');
+    document.getElementById('helpModal').setAttribute('hidden', '');
 }
 
-// Close modal when clicking outside
 window.onclick = function(event) {
     const modal = document.getElementById('helpModal');
     if (event.target === modal) {
-        modal.classList.remove('show');
+        modal.setAttribute('hidden', '');
     }
 }
 
